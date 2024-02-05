@@ -1,0 +1,45 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} 500 Error {% endblock %}
+
+{% block content %} 
+
+	<!-- [ auth-signin ] start -->
+	<div class="auth-wrapper">
+		<div class="auth-content">
+			<div class="card">
+				<div class="row align-items-center text-center">
+					<div class="col-md-12">
+						<div class="card-body">
+							<img src="/static/assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
+							<h4 class="mb-3 f-w-400">
+                                Acces Refusé    
+                            </h4>
+                            <p class="mb-2 text-muted">
+                                Vous n'etes pas autorisé à accéder à ce Module.
+                            </p>
+
+                            <br />
+                            <form action="/">
+                                <button class="btn btn-block btn-primary mb-4">ACCUEIL</button>
+                            </form>
+
+                            <p class="mb-2 text-muted">
+                                S'il s'agit d'une erreur d'autorisation veuillez contacter <a href="#" class="f-w-400">l'Administrateur</a>.
+                            </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- [ auth-signin ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<script src="/static/assets/js/waves.min.js"></script>
+
+{% endblock javascripts %} 

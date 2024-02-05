@@ -1,0 +1,89 @@
+{% extends "layouts/base_achat.html" %}
+
+{% block title %} Liste Commandes En attente de Validation{% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container">
+		<div class="pcoded-content">
+			<!-- [ breadcrumb ] start -->
+			
+			<!-- [ breadcrumb ] end -->
+			<!-- [ Main Content ] start -->
+			<div class="row">
+				<!-- [ sample-page ] start -->
+				
+
+				<!--Commande en cours-->
+				<div class="col-sm-12">
+					{% for commande_aprv in pending_cmd %}
+						<div class="card" style="background-color:#fd7e14;">
+
+							<div class="card-header">
+								<h4 style="color:white ;" >BC {{commande_aprv.numero_dim}} <span style="color:white ;  margin-left: 50px" >{{commande_aprv.fournisseur_dim}}</span></h4>
+								<h4 style="color:white ;" > {{commande_aprv.projet_dim}} </h4>
+								<span style="color:white ;" >Date L. Sht: {{commande_aprv.dls_dim|date:'d-m-Y'}} </span> </br>
+								<h5 style="color:greenyellow ;" ><span>En attente de Validation</span> </h5> </br>
+								<h5 style="color:white ;" > crée le : {{ commande_aprv.date|date:'d-F-Y'}} à {{ commande_aprv.date|date:'H'}} H {{ commande_aprv.date|date:'i'}} mn </h5>
+								<div class="card-header-right">
+									<div class="btn-group card-option">
+										<button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="feather icon-more-horizontal" style="color:white ;"></i>
+										</button>
+										<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+											<form class="dropdown-item"><li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> Masquer les details</span><span style="display:none"><i class="feather icon-plus"></i> Afficher les details</span></a></li></form>
+											<form action="/rappeler_cmd/{{commande_aprv.id}}" class="dropdown-item" style="background-color:grey ;"><button class="dropdown-item reload-card"><a><i class="feather icon-rotate-ccw"></i> Rappeler la Commande</a></button></form>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+
+							<div class="card-body" style="background-color:rgb(144, 209, 255);">
+
+								<table class="table table-hover m-b-0">
+									<thead>
+										<tr>
+											<th><span style="color:cornflowerblue;">Article <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Réf. Fourn <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Quantité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PU <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Unité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+										{% for data in commande_pending %}
+											{% if data.fournisseur_commande == commande_aprv.fournisseur_dim and data.numero_commande == commande_aprv.numero_dim %}
+												<tr>
+													<td>{{data.article_commande}}</td>
+													<td style="font-weight:bold;">{{data.ref_fourn_commande}}</td>
+													<td style="font-weight:bold ;">{{data.quantity_commande}}</td>
+													<td style="font-weight:bold ;" >{{data.pu_commande}}</td>
+													<td>{{data.unity_commande}}</td>
+													
+												</tr>
+
+											{% endif %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<!-- [ Main Content ] end -->
+		</div>
+	</div>
+	<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

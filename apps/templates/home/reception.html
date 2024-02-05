@@ -1,0 +1,123 @@
+{% extends "layouts/base_mag.html" %}
+
+{% block title %} Reception {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+    <style>
+
+        tr {
+            background-color: blanchedalmond;
+        }
+        
+    </style>
+
+{% endblock stylesheets %}
+
+{% block content %}	
+
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container">
+		<div class="pcoded-content">
+			<!-- [ breadcrumb ] start -->
+			<div class="page-header"> 
+				<div class="page-block">
+						<div class="col-md-12">
+							<div class="page-header-title">
+								<h5 class="m-b-10" style="color:cornflowerblue ;">RECEPTION DE COMMANDE</h5>
+							</div>
+						</div>
+				</div>
+			</div>
+			<!-- [ breadcrumb ] end -->
+			<!-- [ Main Content ] start -->
+			<div class="row">
+				<!-- [ sample-page ] start -->
+				<div class="col-sm-12">
+					
+						<div class="card" style="background-color:#4099ff;">
+
+							<div class="card-header">
+								<h4 style="color:white ;" >Fournisseur   <span style="color:#4099ff ;">  ||||  </span> N° 2667</h4>
+								
+								<div class="card-header-right">
+									<div class="btn-group card-option">
+										<button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="feather icon-more-horizontal" style="color:white ;"></i>
+										</button>
+										<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                            <form class="dropdown-item"><li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> Masquer les details</span><span style="display:none"><i class="feather icon-plus"></i> Afficher les details</span></a></li></form>
+                                            <form action="/confirm_commande/{{commande_env.numero_commande}}/{{commande_env.nom_fournisseur}}" class="dropdown-item close-card" style="background-color:#4099ff;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> VALIDER SUIVI</a></button></form>
+											<form action="/confirm_all_line/{{commande_env.numero_commande}}/{{commande_env.nom_fournisseur}}" class="dropdown-item close-card" style="background-color:cyan;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> Confirmer toute les lignes</a></button></form>
+											<form action="/unconfirm_all_line/{{commande_env.numero_commande}}/{{commande_env.nom_fournisseur}}" class="dropdown-item" style="background-color:tomato ;"><button class="dropdown-item close-card"><a><i class="feather icon-x-square"></i> Annuler toute les lignes</a></button></form>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+
+							<div class="card-body" style="background-color:#4099ff;">
+
+								<table class="table table-hover m-b-0">
+									<thead>
+										<tr>
+											<th><span style="color:cornflowerblue;">Article <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Qté Receptionnée <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Qté Commandée <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Unité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Qté Restante <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                            <th><span style="color:cornflowerblue;">Receptionée <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                            <th><span style="color:cornflowerblue;"><a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+											<tr >
+													<td>article 1</td>
+													<td style="font-weight:bold ;"><input type="number" placeholder="0" min="0" style="width: 100px;"></td>
+													<td style="font-weight:bold ;" > 4</td>
+													<td>P</td>
+													<td style="font-weight:bold ;" >4</td>
+                                                    <td style="font-weight:bold ;" >Partiellement</td>
+                                                    <form action="/confirm_commande_line/{{data.id}}"> <td> <button class="dropdown-item reload-card" style="background-color: springgreen ; border-radius: 10px; width: 60px; "><a href="#!"><i class="feather icon-check-square" style="color:white"></i></a></button> </td> </form>
+												</tr>
+
+
+
+
+												<tr style="background-color:aquamarine ;">
+													<td>article 2</td>
+													<td style="font-weight:bold ;">100</td>
+													<td style="font-weight:bold ;" >100</td>
+													<td>P</td>
+													<td style="font-weight:bold ;" >0</td>
+                                                    <td style="font-weight:bold ;" >Entièrement</td>
+                                                    
+                                                    <td>  </td>
+												</tr>
+
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+
+				
+
+
+
+				</div>
+				<!-- [ sample-page ] end -->
+			</div>
+			<!-- [ Main Content ] end -->
+		</div>
+	</div>
+	<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,91 @@
+{% extends "layouts/base_achat.html" %}
+
+{% block title %} Liste Commandes Validées {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container">
+		<div class="pcoded-content">
+			<!-- [ breadcrumb ] start -->
+			<div class="page-header">
+				
+			</div>
+			<!-- [ breadcrumb ] end -->
+			<!-- [ Main Content ] start -->
+			<div class="row">
+				<!-- [ sample-page ] start -->
+				<div class="col-sm-12">
+					{% for commande_aprv in aprouved_list_cmd %}
+						<div class="card" style="background-color:#20c997;">
+
+							<div class="card-header">
+								<h4 style="color:white ;" >BC {{commande_aprv.identifier}}<span style="color:white ;  margin-left: 50px" >{{commande_aprv.fournisseur}}</span>  </h4>
+								<h4 style="color:white ;" >{{commande_aprv.projet}} </h4> </br>
+								<span style="color:white; font-size: medium;" > DLS :  {{ commande_aprv.dls|date:'d/m/Y'}}</span>
+								<div class="card-header-right">
+									<div class="btn-group card-option">
+										<button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="feather icon-more-horizontal" style="color:white ;"></i>
+										</button>
+										<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+											<form action="/envoyer_commande/{{commande_aprv.identifier}}/{{commande_aprv.fournisseur}}/{{commande_aprv.projet}}" class="dropdown-item close-card" style="background-color:cyan;"><button class="dropdown-item reload-card"><a ><i class="feather icon-shopping-cart"></i> Commander</a></button></form>
+											<form class="dropdown-item"><li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> Masquer les details</span><span style="display:none"><i class="feather icon-plus"></i> Afficher les details</span></a></li></form>
+											<form action="/grouper_cmd/{{commande_aprv.id}}" class="dropdown-item" style="background-color:cadetblue ;"><button class="dropdown-item close-card"><a><i class="feather icon-save"></i> Grouper</a></button></form>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+
+							<div class="card-body" style="background-color:rgb(144, 209, 255);">
+
+								<table class="table table-hover m-b-0">
+									<thead>
+										<tr>
+											<th><span style="color:cornflowerblue;">Article <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Réf. Fourn <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Quantité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PU <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Unité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PRIX TOTAL <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+										{% for data in commande %}
+											{% if data.fournisseur_commande == commande_aprv.fournisseur and data.is_approuved == 1 and data.numero_commande == commande_aprv.identifier %}
+												<tr>
+													<td>{{data.article_commande}}</td>
+													<td style="font-weight:bold;">{{data.ref_fourn_commande}}</td>
+													<td style="font-weight:bold ;">{{data.quantity_commande}}</td>
+													<td style="font-weight:bold ;" >{{data.pu_commande}}</td>
+													<td>{{data.unity_commande}}</td>
+													<td style="font-weight:bold ;" >{{data.prix_commande}}</td>
+												</tr>
+
+											{% endif %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<!-- [ sample-page ] end -->
+
+			
+			</div>
+			<!-- [ Main Content ] end -->
+		</div>
+	</div>
+	<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

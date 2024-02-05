@@ -1,0 +1,43 @@
+
+	<!-- [ navigation menu ] start -->
+	<nav class="pcoded-navbar menupos-fixed menu-light ">
+		<div class="navbar-wrapper  ">
+			<div class="navbar-content scroll-div " >
+				<ul class="nav pcoded-inner-navbar ">
+					<li class="nav-item pcoded-menu-caption">
+						<label>Navigation</label>
+					</li>
+					<li class="nav-item">
+					    <a href="magasin.html" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-home"></i></span><span class="pcoded-mtext">MAGASIN</span></a>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Modules</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="reception.html">RECEPTION</a></li>
+					        <li><a href="sortie_prod.html">SORTIE PRODUCTION</a></li>
+							<li><a href="sortie_directe.html">SORTIE DIRECTE</a></li>
+							<li><a href="entree_directe.html">ENTREE DIRECTE</a></li>
+
+					    </ul>
+					</li>
+				
+					<li class="nav-item pcoded-menu-caption">
+						<label>Session</label>
+					</li>
+					<li class="nav-item">
+					    <a href="{% url 'logout' %}" 
+						   class="nav-link "><span class="pcoded-micon">
+						   <i class="feather icon-log-out"></i></span><span class="pcoded-mtext">Deconnecter</span></a>
+					</li>
+					
+
+				</ul>
+				
+				
+				
+			</div>
+		</div>
+	</nav>
+    <!-- [ navigation menu ] end -->

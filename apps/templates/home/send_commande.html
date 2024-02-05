@@ -1,0 +1,79 @@
+{% extends "layouts/base_achat.html" %}
+
+{% block title %} Generation et envoie de Bon de Commande {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container">
+		<div class="pcoded-content">
+			<!-- [ breadcrumb ] start -->
+			<div class="page-header">
+				<div class="page-block">
+						<div class="col-md-12">
+							<div class="page-header-title">
+								<h5 class="m-b-10" style="color:cornflowerblue ;">GENERATION ET ENVOIE DE BON DE COMMANDE</h5>
+							</div>
+						</div>
+				</div>
+			</div>
+			<!-- [ breadcrumb ] end -->
+			<!-- [ Main Content ] start -->
+			<div class="row">
+				<!-- [ sample-page ] start -->
+				<div class="col-sm-12">
+					{% for commande in envoie_commande_list %}
+						<div class="card" style="background-color:cadetblue;">
+
+							<div class="card-header">
+								<h4 style="color:white ;" >{{commande.nom_fournisseur}} / BC {{commande.numero_commande}}</h4>
+								<h4 style="color:white ;" >{{commande.ref_projet}}</h4>
+								<div class="card-header-right">
+									<div class="btn-group card-option">
+										<button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="feather icon-more-horizontal" style="color:white ;"></i>
+										</button>
+										<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                            <form action="/bon_de_commande/{{commande.numero_commande}}/{{commande.nom_fournisseur}}" class="dropdown-item reload-card" style="background-color:gray;"><button class="dropdown-item reload-card" ><a ><i class="feather icon-file-text"></i> GENERER LE BON DE COMMANDE</a></button></form>
+											<form action="/mailing_commande/{{commande.nom_fournisseur}}/{{commande.numero_commande}}" class="dropdown-item close-card" style="background-color:cyan;"><button class="dropdown-item reload-card"><a ><i class="feather icon-shopping-cart"></i> Envoyer</a></button></form>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+                            <form name="form_send_commande" method="post" action="" id="form_send_commande">
+                            {% csrf_token %} 
+								<div class="input-group-prepend" style="margin: 20px; " >
+									<span class="input-group-text"><i class="feather icon-mail" style="margin-left: 5px; margin-right: 10px;"> </i> Email du Fournisseur :  <span style="font-weight:bold; margin-left: 5px;" >{{commande.email_fournisseur}}</span></span>
+								</div>
+								
+                                <div class="input-group mb-4" style="margin-left: 20px;">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="feather icon-alert-triangle" style="margin-right: 10px;"></i> Remarque</span>
+									</div>
+                                    <input type="text", name="rmq" style="width: 700px; margin-left: 5px;">
+								</div>
+								
+								<button type="submit" name="entete_bc" class="btn btn-block btn-primary" id="form_send_commande">AJOUTER RMQ (OPTIONNELLE)</button>
+							
+							</form>
+
+                            
+
+						</div>
+					{% endfor %}
+				</div>
+				<!-- [ sample-page ] end -->
+			</div>
+			<!-- [ Main Content ] end -->
+		</div>
+	</div>
+	<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

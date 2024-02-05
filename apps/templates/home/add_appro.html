@@ -1,0 +1,210 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Demande {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}  {% endblock stylesheets %}
+
+{% block content %}	
+
+{% block body %}
+
+
+
+<!-- [ Main Content ] start -->
+
+<!-- [ auth-signin ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+
+            <div class="row align-items-center text-center">
+
+                <form role="form_item_appro" method="post" action="">
+
+                    {% csrf_token %}
+
+                   
+															
+                    <div class="input-group mb-4" style="margin: 20px;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="feather icon-shopping-cart"></i></span>
+                        </div>
+                        <input name="article_item" type="text" class="form-control" list="articles" placeholder="Selectionner l'article">
+                            <datalist id="articles">
+                                {% for item in article %}
+                                <option value="{{item.ref_intern}} - {{item.designation}}">
+                                {% endfor %}
+                            </datalist>   
+
+                        <div class="input-group-prepend" style="margin-left:5px; ">
+                            <span class="input-group-text"><i class="feather icon-shield"></i></span>
+                        </div> 
+
+                        <input name="fournisseur_item" type="text" class="form-control" list="fournisseurs" placeholder="Choisir le Fournisseur">
+                        <datalist id="fournisseurs">
+                            {% for item in fournisseur %}
+                            <option value="{{item.name}}">
+                            {% endfor %}
+                        </datalist>  
+
+                        <div class="input-group-prepend" style="margin-left:5px; ">
+                            <span class="input-group-text"><i class="feather icon-layers"></i></span>
+                        </div> 
+
+                        <input name="quantity_item" type="number" min="0" step="0.001" class="form-control" placeholder="Quantité">
+
+                        <div class="input-group-prepend" style="margin-left:5px; ">
+                            <span class="input-group-text"><i class="feather icon-box"></i></span>
+                        </div>
+
+                        <input name="unity_item" type="text" class="form-control" list="unities" placeholder="Unité">
+                        <datalist id="unities">
+                            {% for item in unity %}
+                            <option value="{{item}}">
+                            {% endfor %}
+                        </datalist> 
+
+                        <div class="input-group-prepend" style="margin-left:5px; ">
+                            <span class="input-group-text"><i class="feather icon-check-square"></i></span>
+                        </div> 
+
+                        <input name="" type="text" min="0" class="form-control" placeholder="Projet" style="margin-right: 20px ;" >
+
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block mb-4" style="width: 20%; margin-left: 25px; border-radius: 10px;">Ajouter</button>
+                
+                </form>
+                {% if msg is not None %}
+                <h6 style="color:red; text-align: center; margin-left: 90px;"> {{msg}} </h6> 
+                {% endif %}
+                
+
+                <!-- fin test -->
+                
+            </div>
+
+				<!-- [ sample-page ] start -->
+
+                <!--Table-->
+					
+                <div class="col-lg-12" >
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h5>Liste des Articles Selectionnés</h5>
+                            <div class="card-header-right">
+
+                                <div class="btn-group card-option">
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="feather icon-more-horizontal"></i>
+                                    </button>
+                                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                        <form action="/send_demande" class="dropdown-item reload-card" style="background-color: aqua;"><button class="dropdown-item reload-card"><a ><i class="feather icon-shopping-cart"></i> PASSER LA DEMANDE</a></button></form>
+                                        <form class="dropdown-item reload" ><li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> AGRANDIR LA LISTE</span><span style="display:none"><i class="feather icon-minimize"></i> REDUIRE LA LISTE</span></a></li></form>
+                                    </ul>
+                                </div>
+                            </div>
+                            <ul class="nav nav-pills nav-fill mt-3 border-bottom pb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="feather icon-refresh-cw m-r-5"></i>CREATION DE DEMANDE D'APPROVISIONNEMENT</a>
+                                </li>
+                               
+                               
+                                
+                            </ul>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="table-responsive">
+                                        <div class="customer-scroll" style="height:420px;position:relative;">
+                                            <table class="table table-hover m-b-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th><span>Article <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                        <th><span>Fournisseur <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                        <th><span>Quantité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                        <th><span>Unité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                     </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for data in query_result %}
+                                                       <tr>
+                                                            
+                                                                <td style="color:#4099ff; width: 700px;">{{data.article_dem}}</td>
+                                                            
+                                                                <td style="color:#4099ff; width: 200px;"> {{data.fournisseur_dem}} </td>
+                                                             
+                                                                <td style="color:#4099ff;"> {{data.quantity_dem}} </td>
+
+                                                                <td style="color:#4099ff;"> {{data.unity_dem}} </td>
+                   
+                                                                <form action="/delete_item_demande/{{data.id}}"> <td> <button class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i></a></button> </td> </form>
+                                                    
+                                                        </tr>
+
+
+                                                    {% endfor %} 
+
+                                                    
+                                                  
+                                                </tbody>
+
+                                                
+                                                
+                                               
+                                            </table>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<!--End Table -->
+			
+
+           
+
+        </div>
+
+        
+</div>
+<!-- [ auth-signin ] end -->
+
+
+<!-- [ Main Content ] end --> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+
+    
+   
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+
+{% endblock javascripts %}

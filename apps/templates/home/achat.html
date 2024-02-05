@@ -1,0 +1,144 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Achat {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+{% block body %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+            
+            <div class="row">
+                <!-- order-card start -->
+                <div class="col-md-6 col-xl-3" onclick='location.href="liste_demande.html";' style="cursor: pointer;">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">Demande d'Achat</h6>
+                            <h2 class="text-right text-white"><i class="feather icon-shopping-cart float-left"></i><span>{{demande_total}}</span></h2>
+                            <p class="m-b-0">En Attente d'Approbation<span class="float-right">{{waiting_aprouved_demande}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3" onclick='location.href="liste_commande.html";' style="cursor: pointer;">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">Validation de Commande</h6>
+                            <h2 class="text-right text-white"><i class="feather icon-tag float-left"></i><span>{{commande_total}}</span></h2>
+                            <p class="m-b-0">En attente d'Approbation<span class="float-right">{{waiting_aprouved_commande}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3" onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-yellow order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">Historique Achat</h6>
+                            <h2 class="text-right text-white"><i class="feather icon-repeat float-left"></i><span>15</span></h2>
+                            <p class="m-b-0">Total<span class="float-right">12</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3"onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">Listing</h6>
+                            <h2 class="text-right text-white"><i class="feather icon-award float-left"></i><span>00</span></h2>
+                            <p class="m-b-0">Projet<span class="float-right">00</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customer overview end -->
+            </div>
+            <!-- [ Main Content ] end -->       
+           
+    </div>
+    <!-- Creation de commande d'achat et demande d'achat -->
+        <div class="pcoded-content">
+            <div class="row">
+                <div class="col-md-6 col-xl-2" onclick='location.href="add_demande.html";' style="cursor: pointer;">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Créer une DEMANDE</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-2" onclick='location.href="add_commande.html";' style="cursor: pointer;">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Créer une COMMANDE</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-2" onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Demmande de PRIX</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-2" onclick='location.href="price_chart.html";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Evaluation de PRIX</h6>
+                        </div>
+                    </div>
+                </div>  
+                <div class="col-md-6 col-xl-2" onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Suivi de COMMANDE</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-2" onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Bon de Cmd Visé</h6>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+       </div>
+    <!-- Fin de Creation de commande d'achat et demande d'achat -->   
+   
+    <!-- Creation de commande d'achat et demande d'achat -->
+    <div class="pcoded-content">
+        <div class="row">
+            <div class="col-md-6 col-xl-6" onclick='location.href="";' style="cursor: pointer;">
+                <div class="card bg-c-green order-card">
+                    <div class="card-body">
+                        <h6 class="text-center text-white">CREER UNE COMMANDE PAR PROJET</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-6" onclick='location.href="";' style="cursor: pointer;">
+                <div class="card bg-c-red order-card">
+                    <div class="card-body">
+                        <h6 class="text-center text-white">CONSULTER LISTING PAR BATEAUX</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+   
+<!-- Creation de commande d'achat et demande d'achat --> 
+    <!-- [ Main Content ] end -->
+
+    {% endblock %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+
+{% endblock javascripts %}

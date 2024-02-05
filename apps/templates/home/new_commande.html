@@ -1,0 +1,313 @@
+{% extends "layouts/base_achat.html" %}
+
+{% block title %} Commande Simple {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}  {% endblock stylesheets %}
+
+{% block content %}	
+
+{% block body %}
+
+
+
+<!-- [ Main Content ] start -->
+
+<!-- [ auth-signin ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+
+
+        {%  for new_bc in new_bc_list  %}
+  
+            <div class="card" style="background-color:#00bcd4;">
+
+                <div class="card-header">
+                    <h4 style="color:white ;" >BC {{new_bc.num_bc}} <span style="color:white ;  margin-left: 50px" >{{new_bc.fournisseur_bc}}</span></h4>
+					<h4 style="color:white ;" > {{new_bc.ref_bc}} </h4>
+					<h5 style="color:white ;" > DLS : {{ new_bc.dls_bc|date:'d-F-Y'}}</h5>			
+
+                    
+            
+                    <div class="card-header-right">
+                        <div class="btn-group card-option">
+                            <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <h6 class="feather icon-more-horizontal" style="color:white ;"></h6>
+                            </button>
+                            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                <form action="/new_commande_validation/{{new_bc.id}}" class="dropdown-item close-card" style="background-color:cyan;"><button class="dropdown-item reload-card"><a ><i class="feather icon-shopping-cart"></i> Commander</a></button></form>
+                                <form class="dropdown-item"><li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> Masquer les details</span><span style="display:none"><i class="feather icon-plus"></i> Afficher les details</span></a></li></form>
+                                <form style="margin: 10px; width: 91%;"  class="btn btn-primary" data-toggle="modal" data-id="{{new_bc.id}}" data-target="#exampleModalCenter-{{new_bc.id}}"><a><i class="feather icon-edit"></i> Modifier Entête</a></form>
+                                <form action="/cancel_bc/{{new_bc.num_bc}}" class="dropdown-item" style="background-color:red ;"><button class="dropdown-item close-card"><a><i class="feather icon-trash"></i> Annuler</a></button></form>
+                            </ul>
+
+
+            <!--Modal update BC start-->
+            <div id="exampleModalCenter-{{new_bc.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+        
+                        
+                    
+                        <div class="pcoded-content">
+        
+                           
+                            <form  method="post" action="/new_commande_update/{{new_bc.id}}">
+        
+                                {%  csrf_token  %}
+                    
+                            <div class="input-group-prepend" style="margin: 10px;">
+                                <span class="input-group-text" style="width:220px ;"><i class="feather icon-shield"> FOURNISSEUR</i></span>
+                            
+                                <input name="update_fourn_bc" type="text" style="margin-left: 5px;" class="form-control" list="fournisseurs" placeholder="Choisir le Fournisseur">
+                                            <datalist id="fournisseurs">
+                                                {% for item in fournisseur %}
+                                                <option value="{{item.name}}">
+                                                {% endfor %}
+                                            </datalist>  
+                            </div>
+                    
+                            <div class="input-group-prepend" style="margin: 10px;">
+                                <span class="input-group-text" style="width:220px ;"><i class="feather icon-box"> REFERENCE PROJET </i></span>
+                            
+                                <input name="update_ref_bc" type="text" style="margin-left: 5px;" class="form-control"  placeholder="Saisir la Référence du Projet">
+                                             
+                            </div>
+                    
+                            <div class="input-group-prepend" style="margin: 10px;">
+                                <span class="input-group-text" style="width:220px ;"><i class="feather icon-calendar"> DATE L.SOUHAITEE </i></span>
+                            
+                                <input name="update_dls_bc" type="date" style="margin-left: 5px;" class="form-control" placeholder="Saisir la Date de livraison souhaitée">
+                                            
+                            </div>
+        
+        
+                            <div class="modal-footer">
+                                <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" name="update_bc" class="btn  btn-primary">MODIFIER</button>
+                            </div>
+        
+                            </form>
+                        </div>            
+                    </div>
+                </div>
+            </div>
+            <!--Modal update BC end-->
+
+
+
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+
+
+                <div class="row align-items-center text-center">
+
+                   
+                     
+                    <form  method="post" action="/new_line_bc/{{new_bc.num_bc}}/{{new_bc.ref_bc}}/{{new_bc.fournisseur_bc}}" id="form_item_commande">
+                      
+                        {% csrf_token %}
+    
+                       
+                                                                
+                        <div class="input-group" style="margin: 20px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="feather icon-shopping-cart"></i></span>
+                            </div>
+                            <input name="article_line_bc" type="text" class="form-control" list="articles" placeholder="Selectionner l'article">
+                                <datalist id="articles">
+                                    {% for item in article %}
+                                    <option value="{{item.designation}}">{{item.ref_intern}} </option>
+                                    {% endfor %}
+                                </datalist>   
+    
+                            <div class="input-group-prepend" style="margin-left:5px; ">
+                                <span class="input-group-text"><i class="feather icon-shield"></i></span>
+                            </div> 
+    
+    
+    
+                            <input name="ref_line_bc" type="text" class="form-control" placeholder="Référence Fournisseur">
+                             
+    
+                            
+                            <div class="input-group-prepend" style="margin-left:5px; ">
+                                <span class="input-group-text"><i class="feather icon-layers"></i></span>
+                            </div> 
+    
+                            <input name="qty_line_bc" type="number" min="0" step="0.001" class="form-control" placeholder="Quantité">
+    
+                            <div class="input-group-prepend" style="margin-left:5px; ">
+                                <span class="input-group-text"><i class="feather icon-box"></i></span>
+                            </div>
+    
+                            <input name="unity_line_bc" type="text" class="form-control" list="unities" placeholder="Unité">
+                            <datalist id="unities">
+                                {% for item in unity %}
+                                <option value="{{item}}">
+                                {% endfor %}
+                            </datalist> 
+    
+                            <div class="input-group-prepend" style="margin-left:5px; ">
+                                <span class="input-group-text"><i class="feather icon-check-square"></i></span>
+                            </div> 
+    
+                            <input name="pu_line_bc" type="number" min="0" step="0.001" class="form-control" placeholder="Prix unitaire" style="margin-right: 10px ;" >
+    
+                            <button type="submit" name="line_bc" class="btn btn-primary" style="width: 10%; border-radius: 10px;">Ajouter</button>     
+                        </div>
+                        
+                        
+                    
+                    </form>
+
+                 
+                
+                    <!-- fin test -->
+                    
+                </div>
+
+
+                
+
+
+                <div class="card-body" style="background-color:rgb(144, 209, 255);">
+
+                    <table class="table table-hover m-b-0">
+                        <thead>
+                            <tr>
+                                <th><span style="color:cornflowerblue;">Article <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                <th><span style="color:cornflowerblue;">Réf. Fourn <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                <th><span style="color:cornflowerblue;">Quantité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                <th><span style="color:cornflowerblue;">PU <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                <th><span style="color:cornflowerblue;">Unité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                <th><span style="color:cornflowerblue;">PRIX TOTAL <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            {% for data_line in commande %}
+                                {% if data_line.numero_commande == new_bc.num_bc %}
+                                    <tr>
+                                        <td class="editable" data-id="{{data_line.id}}" data-type="article" >{{data_line.article_commande}}</td>
+                                        <td style="font-weight:bold;" class="editable" data-id="{{data_line.id}}" data-type="ref">{{data_line.ref_fourn_commande}}</td>
+                                        <td style="font-weight:bold ;"  class="editable" data-id="{{data_line.id}}" data-type="quantity">{{data_line.quantity_commande}}</td>
+                                        <td style="font-weight:bold ;"  class="editable" data-id="{{data_line.id}}" data-type="pu">{{data_line.pu_commande}}</td>
+                                        <td  class="editable" data-id="{{data_line.id}}" data-type="unity">{{data_line.unity_commande}}</td>
+                                        <td style="font-weight:bold ;" >{{data_line.prix_commande}}</td>
+                                    </tr>
+
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+               
+           
+
+        {%  endfor  %}   
+
+    
+
+
+
+
+        
+</div>
+<!-- [ auth-signin ] end -->
+
+
+<!-- [ Main Content ] end --> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+           
+   
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(document).on("dblclick", ".editable", function(){
+                var value = $(this).text();
+                var type = $(this).data("type");
+                var input = "<input type='text'  class = 'input-data' list='articles' value = '"+value+"' placeholder='Article' class = 'form-control' style='width:250px' >";
+                if (type == "ref") { input ="<input type='text'  class = 'input-data' value = '"+value+"' class = 'form-control' style='width:150px' >"} ;
+                if (type == "quantity" || type == "pu") { input ="<input type='number'  class = 'input-data' value = '"+value+"' class = 'form-control' style='width:100px' >"} ;
+                if (type == "unity") { input ="<input type='text' list='unities' class = 'input-data' value = '"+value+"' class = 'form-control' style='width:70px' >"} ;
+                $(this).html(input);
+                $(this).removeClass("editable")
+            });
+            $(document).on("blur", ".input-data", function(){
+                var value = $(this).val();
+                var td = $(this).parent('td');		
+                $(this).remove();
+                td.html(value);
+                td.addClass("editable");
+                var type = td.data("type");
+                sendToServer(td.data("id"), value, type);
+            });
+            $(document).on("keypress", ".input-data", function(e){
+                var key = e.which;
+                if (key == 13)
+                {
+                    var value = $(this).val();
+                    var td = $(this).parent('td');
+                    $(this).remove();
+                    td.html(value);
+                    td.addClass("editable");
+                    var type = td.data("type");
+                    sendToServer(td.data("id"), value, type);
+                }	
+            });
+    
+            function sendToServer(id, value, type){
+                console.log(id);
+                console.log(value);
+                $.ajax({
+                    url:"update_line",
+                    type:"POST",
+                    data:{id:id, value:value, type:type},
+                })
+                .done(function(response){
+                    console.log(response)
+                })
+                .fail(function(){
+                    console.log("Erreur du server");
+                })
+            }
+    
+        });
+    </script>
+    
+
+   
+
+{% endblock javascripts %}

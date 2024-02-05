@@ -1,0 +1,121 @@
+{% extends "layouts/base_achat.html" %}
+
+{% block title %} Transports Planifiés {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+    <style>
+
+        tr {
+            background-color: blanchedalmond;
+        }
+        
+    </style>
+
+{% endblock stylesheets %}
+
+{% block content %}	
+
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container">
+		<div class="pcoded-content">
+			<!-- [ breadcrumb ] start -->
+			<div class="page-header">
+				<div class="page-block">
+						<div class="col-md-12">
+							<div class="page-header-title">
+								<h5 class="m-b-10" style="color:cornflowerblue ;">TRANSPORTS PLANIFIES</h5>
+							</div>
+						</div>
+				</div>
+			</div>
+			<!-- [ breadcrumb ] end -->
+			<!-- [ Main Content ] start -->
+			<div class="row">
+				<!-- [ sample-page ] start -->
+				<div class="col-sm-12">
+					{% for commande_env in transport_planifies %}
+						<div class="card" style="background-color:#4099ff;">
+
+							<div class="card-header">
+								<h4 style="color:white ;" >{{commande_env.nom_fournisseur}}    <span style="color:#4099ff ;">  ||||  </span> N° {{commande_env.numero_commande}}</h4>
+								<h5 style="color:white ;" > PLANIFIE AVEC LE TRANSPORTEUR : <span style="color:#4099ff ;">  ||||  </span> MOUHAZ </h5>
+								<div class="card-header-right">
+									<div class="btn-group card-option">
+										<button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="feather icon-more-horizontal" style="color:white ;"></i> 
+										</button>
+										<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                            <form class="dropdown-item"><li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> Masquer les details</span><span style="display:none"><i class="feather icon-plus"></i> Afficher les details</span></a></li></form>
+                                            <form action="/transporteur_mohaz/{{commande_env.numero_commande}}" class="dropdown-item close-card" style="background-color:#4099ff;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> MOUHAZ</a></button></form>
+                                            <form action="/transporteur_rabia/{{commande_env.numero_commande}}" class="dropdown-item close-card" style="background-color:#4099ff;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> RABIA</a></button></form>
+											
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+
+							<div class="card-body" style="background-color:#4099ff;">
+
+								<table class="table table-hover m-b-0">
+									<thead>
+										<tr>
+											<th><span style="color:cornflowerblue;">Article <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Quantité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PU <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Unité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PRIX TOTAL <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                            <th><span style="color:cornflowerblue;">Confirmée <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                            <th><span style="color:cornflowerblue;"><a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+										{% for data in commande %}
+											{% if data.fournisseur_commande == commande_env.nom_fournisseur and data.numero_commande == commande_env.numero_commande and data.is_confirmed == "NON" %}
+												<tr >
+													<td>{{data.article_commande}}</td>
+													<td style="font-weight:bold ;">{{data.quantity_commande}}</td>
+													<td style="font-weight:bold ;" >{{data.pu_commande}}</td>
+													<td>{{data.unity_commande}}</td>
+													<td style="font-weight:bold ;" >{{data.prix_commande}}</td>
+                                                    <td style="font-weight:bold ;" >{{data.is_confirmed}}</td>
+                                                    <form action="/confirm_commande_line/{{data.id}}"> <td> <button class="dropdown-item reload-card"><a href="#!"><i class="feather icon-check-square" style="color:aqua"></i></a></button> </td> </form>
+												</tr>
+
+											{% endif %}
+
+                                            {% if data.fournisseur_commande == commande_env.nom_fournisseur and data.numero_commande == commande_env.numero_commande and data.is_confirmed == "OUI" and data.is_ready == 0 %}
+												<tr style="background-color:aquamarine ;">
+													<td>{{data.article_commande}}</td>
+													<td style="font-weight:bold ;">{{data.quantity_commande}}</td>
+													<td style="font-weight:bold ;" >{{data.pu_commande}}</td>
+													<td>{{data.unity_commande}}</td>
+													<td style="font-weight:bold ;" >{{data.prix_commande}}</td>
+                                                    <td style="font-weight:bold ;" >{{data.is_confirmed}}</td>
+                                                    
+                                                    <form action="/unconfirm_commande_line/{{data.id}}"> <td> <button class="dropdown-item reload-card"><a href="#!"><i class="feather icon-x-square" style="color:darkred ;"></i></a></button> </td> </form>
+												</tr>
+
+											{% endif %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<!-- [ sample-page ] end -->
+			</div>
+			<!-- [ Main Content ] end -->
+		</div>
+	</div>
+	<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,561 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Achat {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+
+{% block stylesheets %}
+
+<style>
+                        .Timeline {
+                    display: flex;
+                    align-items: center;
+                    height: 150px;
+                    margin-top: 50px;
+                    }
+
+                    .event1,
+                    .event2, .event3, .event4, .event5 {
+                    position: relative;
+                    }
+
+                    .button {
+                    position: relative;
+                    width: 0px;
+                    top: -60px;
+                    left: 200px;
+                    }
+
+                    .button_form {
+                    position: relative;
+                    width: 0px;
+                    top: -60px;
+                    left: 200px;
+                    }
+
+                    .event1Bubble {
+                    position: absolute;
+                    background-color: rgba(158, 158, 158, 0.1);
+                    width: 250px;
+                    height: 60px;
+                    top: -70px;
+                    left: -15px;
+                    border-radius: 5px;
+                    box-shadow: inset 0 0 5px rgba(158, 158, 158, 0.64)
+                    }
+
+                    .event2Bubble {
+                    position: absolute;
+                    background-color: rgba(158, 158, 158, 0.1);
+                    width: 180px;
+                    height: 60px;
+                    left: -105px;
+                    top: 33px;
+                    border-radius: 5px;
+                    box-shadow: inset 0 0 5px rgba(158, 158, 158, 0.64)
+                    }
+
+                    .event1Bubble:after,
+                    .event1Bubble:before,
+                    .event2Bubble:after,
+                    .event2Bubble:before {
+                    content: "";
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-color: transparent;
+                    border-bottom: 0;
+                    }
+
+                    .event1Bubble:before {
+                    bottom: -10px;
+                    left: 13px;
+                    border-top-color: rgba(222, 222, 222, 0.66);
+                    border-width: 12px;
+                    }
+
+                    .event1Bubble:after {
+                    bottom: -8px;
+                    left: 13px;
+                    border-top-color: #F6F6F6;
+                    border-width: 12px;
+                    }
+
+                    .event2Bubble:before {
+                    bottom: 59px;
+                    left: 103px;
+                    border-top-color: rgba(222, 222, 222, 0.66);
+                    border-width: 12px;
+                    -webkit-transform: rotate(180deg);
+                    -moz-transform: rotate(180deg);
+                    -o-transform: rotate(180deg);
+                    -ms-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                    }
+
+                    .event2Bubble:after {
+                    bottom: 57px;
+                    left: 103px;
+                    border-top-color: #F6F6F6;
+                    border-width: 12px;
+                    -webkit-transform: rotate(180deg);
+                    -moz-transform: rotate(180deg);
+                    -o-transform: rotate(180deg);
+                    -ms-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                    }
+
+                    .eventTime {
+                    display: flex;
+                    }
+
+                    .DayDigit {
+                    font-size: 27px;
+                    font-family: "Arial Black", Gadget, sans-serif;
+                    margin-left: 10px;
+                    color: #4C4A4A;
+                    }
+
+                    .Day {
+                    font-size: 11px;
+                    margin-left: 5px;
+                    font-weight: bold;
+                    margin-top: 10px;
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: #4099ff;
+                    }
+
+                    .MonthYear {
+                    font-weight: 600;
+                    line-height: 10px;
+                    color: #9E9E9E;
+                    font-size: 9px;
+                    }
+
+                    .eventTitle {
+                    font-family: "Arial Black", Gadget, sans-serif;
+                    color: #4099ff;
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    display: flex;
+                    flex: 1;
+                    align-items: center;
+                    margin-left: 12px;
+                    margin-top: -2px;
+                    }
+
+                    .time {
+                    position: absolute;
+                    font-family: Arial, Helvetica, sans-serif;
+                    width: 50px;
+                    font-size: 8px;
+                    margin-top: -3px;
+                    margin-left: -5px;
+                    color: #9E9E9E;
+                    }
+
+                    .manquant {
+                    position: absolute;
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: #FFB64D;
+                    font-size: 10px;
+                    font-weight: bold;
+                    width: 100px;
+                    top: -8px;
+                    left: 63px;
+                    }
+
+                    .normal {
+                    position: absolute;
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: green;
+                    font-size: 10px;
+                    font-weight: bold;
+                    width: 100px;
+                    top: -8px;
+                    left: 63px;
+                    }
+
+                    .endomager {
+                    position: absolute;
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: #fd7e14;
+                    font-size: 10px;
+                    font-weight: bold;
+                    width: 100px;
+                    top: -8px;
+                    left: 63px;
+                    }
+
+                    .event2Author {
+                    position: absolute;
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: #2ed8b6;
+                    font-size: 8px;
+                    width: 100px;
+                    top: 96px;
+                    left: -32px;
+                    }
+
+                    .time2{
+                    position: absolute;
+                    font-family: Arial, Helvetica, sans-serif;
+                    width: 50px;
+                    font-size: 8px;
+                    margin-top: -31px;
+                    margin-left: -5px;
+                    color: #9E9E9E;
+                    }
+
+                    .now{
+                        background-color: #4099ff;
+                        color: white;
+                        border-radius: 7px;
+                        margin: 5px;
+                        padding: 5px;
+                        font-size: 14px;
+                        height: 40px;
+                        font-family: Arial, Helvetica, sans-serif;
+                        border: 2px solid white;
+                        font-weight: bold;
+                        box-shadow: 0 0 0 2px #4099ff
+                    }
+
+                    .nowpanel{
+                        background-color:white;
+                        color: white;
+                        border-radius: 7px;
+                        height: 40px;
+                      
+                    }
+
+                    .vide{
+                        background-color: #4099ff;
+                        color: white;
+                        border-radius: 7px;
+                        text-align: center;
+                        width: 50%;
+                        height: 50px;
+                        margin: 100px;
+                        margin-left: 300px;
+                        padding: 10px;
+                        font-size: 20px;
+                        font-family: Arial, Helvetica, sans-serif;
+                        border: 2px solid white;
+                        font-weight: bold;
+                        box-shadow: 0 0 0 2px #4099ff
+                    }
+
+                    .futureGray{
+                        filter: grayscale(1);
+                        -webkit-filter: grayscale(1);
+                    
+                    }
+
+                    .futureOpacity{
+                    -webkit-filter: opacity(.3);
+                    filter: opacity(.3);
+                    
+}
+
+.flip {
+
+  text-align: center;
+  background-color: #4099ff;
+
+}
+
+.panel {
+  padding-left: 20px;
+  display: none;
+}
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}	
+
+{% block body %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+
+
+        {% for key, value in decompte.items %} 
+
+          <div class="Timeline">
+
+               <div class="now flip">
+                
+                {% if value > 1 %}
+
+                
+                    {{key}} <span class="badge bg-danger"><span class="sr-only"></span>{{value}}</span>
+                          
+                
+
+                  <!--svg height="100" width="5" style="position: relative; left:50%; top: 15px">
+                    <line x1="0" y1="0" x2="0" y2="100" style="stroke:#4099ff;stroke-width:5" />
+                    Sorry, your browser does not support inline SVG.
+                  </svg-->   
+
+                {%  endif  %} 
+                  
+                {%  if value == 1 %}
+
+                {{key}}
+
+                {% endif %}
+             
+
+               </div> 
+
+                           
+              {% for suivi in suivi_commande %}
+
+              
+              {%  if suivi.nom_fournisseur == key and suivi.order == 1  %}
+                    
+                          <svg height="5" width="2000">
+                            <line x1="0" y1="0" x2="2000" y2="0" style="stroke:#4099ff;stroke-width:5" />
+                            Sorry, your browser does not support inline SVG.
+                          </svg>
+
+
+                          <div class="event1 btn-group card-option">
+                        
+                              <div class="event1Bubble">
+
+                                <div class="eventTime">
+                                  <div class="DayDigit">BC {{suivi.numero_commande}}
+            
+                                  </div>
+
+                                  <div class="Day">
+                                    {{suivi.nom_fournisseur}} 
+                                    <div class="MonthYear">{{suivi.date_position|date:'d-F-Y'}}</div>
+                                    <div class="MonthYear">MULTIPLE</div>
+                                  </div>
+                                </div>
+                                <div class="eventTitle">{{suivi.suivi_position}}</div>
+
+
+                                <div class="button">
+                                  <button type="button" style="color:#4099ff; height: 30px;" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  </button>
+                      
+                                  <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                    
+                                        <form action="/commande_livrer/{{suivi.numero_commande}}" class="dropdown-item close-card" style="background-color:skyblue; margin-bottom: 5px;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> DEPART | EXPEDITION</a></button></form>
+                                        <form action="/commande_livrer/{{suivi.numero_commande}}" class="dropdown-item close-card" style="background-color:skyblue; margin-bottom: 5px;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> DEPART | RETRAIT</a></button></form>
+                                        <form action="/commande_chez_gts/{{suivi.numero_commande}}" class="dropdown-item close-card" style="background-color:skyblue; margin-bottom: 5px;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> ARRIVEE CHEZ GTS</a></button></form>
+                                        <form action="/commande_en_transit/{{suivi.numero_commande}}" class="dropdown-item" style="background-color:skyblue ; margin-bottom: 5px;"><button class="dropdown-item close-card"><a><i class="feather icon-check-square"></i> EN TRANSIT</a></button></form>
+                                        <form action="/commande_receptionnee/{{suivi.numero_commande}}" class="dropdown-item" style="background-color:skyblue ; margin-bottom: 5px;"><button class="dropdown-item close-card"><a><i class="feather icon-check-square"></i> RECEPTIONNEE</a></button></form>
+                                    
+                                  </ul>
+                      
+                                </div>
+
+                                <div class="button_form">
+                                  <button type="button" style="color:#4099ff; height: 30px;" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  </button>
+                      
+                                  <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                    
+                                        <form action="" class="dropdown-item close-card" style="background-color:skyblue; margin-bottom: 5px;">
+                                          <input type="number" placeholder="Colisage" >
+                                          <input type="number" placeholder="Poids">
+                                        <button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> VALIDER</a></button></form>
+                                     
+                                  </ul>
+                      
+                                </div>
+
+                                
+                                
+                              </div>
+                
+                                {% if suivi.etat_commande == "NORMAL"  %}
+                                <div class="normal">{{suivi.etat_commande}}</div>
+                                {% endif %}
+
+                                {% if suivi.etat_commande == "MANQUANT"  %}
+                                <div class="manquant">{{suivi.etat_commande}}</div>
+                                {% endif %}
+
+                                {% if suivi.etat_commande == "ENDOMAGER"  %}
+                                <div class="endomager">{{suivi.etat_commande}}</div>
+                                {% endif %}
+
+                            <svg height="20" width="30">
+                              <circle cx="10" cy="11" r="5" fill="#4099ff" />
+                            </svg>
+                            <div class="time">{{ suivi.date_position|date:'H'}} H {{ suivi.date_position|date:'i'}} mn </div>
+                            
+                          </div>
+
+                          
+                        
+                        <svg height="5" width="300">
+                        <line x1="0" y1="0" x2="300" y2="0" style="stroke:#4099ff;stroke-width:5" />
+                        Sorry, your browser does not support inline SVG.
+                        </svg>
+                        
+                        <svg height="5" width="2000">
+                        <line x1="0" y1="0" x2="2000" y2="0" style="stroke:#4099ff;stroke-width:5" />
+                        Sorry, your browser does not support inline SVG.
+                        </svg>
+                      
+                        <div class="now">
+                          STGI 
+                        </div> 
+                          
+            {% endif %}
+
+            {% endfor %}
+
+          </div>
+
+<!--start panel  -->
+      <div class="panel">
+
+
+      {% for panel in suivi_commande %}
+
+      
+      {%  if panel.nom_fournisseur == key and panel.order == 2  %}
+
+      <div class="Timeline">
+
+                <div class="nowpanel">
+                      <svg height="170" width="5" style="position: relative; left:20px; bottom:  150px">
+                        <line x1="0" y1="0" x2="0" y2="170" style="stroke:#4099ff;stroke-width:5" />
+                        Sorry, your browser does not support inline SVG.
+                      </svg> 
+                </div>
+                  <svg height="5" width="3000" style="margin-left: 15px;">
+                    <line x1="0" y1="0" x2="3000" y2="0" style="stroke:#4099ff;stroke-width:5" />
+                    Sorry, your browser does not support inline SVG.
+                  </svg>
+
+
+                  <div class="event1 btn-group card-option">
+                
+                      <div class="event1Bubble">
+
+                      
+
+                        <div class="eventTime">
+                          <div class="DayDigit">BC {{panel.numero_commande}}
+    
+                          </div>
+
+                          <div class="Day">
+                            {{panel.nom_fournisseur}} 
+                            <div class="MonthYear">{{panel.date_position|date:'d-F-Y'}}</div>
+                          </div>
+                        </div>
+                        <div class="eventTitle">{{panel.suivi_position}}</div>
+
+
+                        <div class="button">
+                          <button type="button" style="color:#4099ff; height: 30px;" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          </button>
+              
+                          <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            
+                                <form action="/commande_livrer/{{panel.numero_commande}}" class="dropdown-item close-card" style="background-color:skyblue; margin-bottom: 5px;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> DEPART | EXPEDIER PAR FOURNISSEUR</a></button></form>
+                                <form action="/commande_livrer/{{panel.numero_commande}}" class="dropdown-item close-card" style="background-color:skyblue; margin-bottom: 5px;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> DEPART | RETRAIT PAR TRANSPORTEUR</a></button></form>
+                                <form action="/commande_chez_gts/{{panel.numero_commande}}" class="dropdown-item close-card" style="background-color:skyblue; margin-bottom: 5px;"><button class="dropdown-item reload-card"><a ><i class="feather icon-check-square"></i> ARRIVEE CHEZ GTS</a></button></form>
+                                <form action="/commande_en_transit/{{panel.numero_commande}}" class="dropdown-item" style="background-color:skyblue ; margin-bottom: 5px;"><button class="dropdown-item close-card"><a><i class="feather icon-check-square"></i> EN TRANSIT</a></button></form>
+                                <form action="/commande_receptionnee/{{panel.numero_commande}}" class="dropdown-item" style="background-color:skyblue ; margin-bottom: 5px;"><button class="dropdown-item close-card"><a><i class="feather icon-check-square"></i> RECEPTIONNEE</a></button></form>
+                            
+                          </ul>
+              
+                        </div>
+
+                        
+                        
+                      </div>
+        
+                        {% if panel.etat_commande == "NORMAL"  %}
+                        <div class="normal">{{suivi.etat_commande}}</div>
+                        {% endif %}
+
+                        {% if panel.etat_commande == "MANQUANT"  %}
+                        <div class="manquant">{{suivi.etat_commande}}</div>
+                        {% endif %}
+
+                        {% if panel.etat_commande == "ENDOMAGER"  %}
+                        <div class="endomager">{{suivi.etat_commande}}</div>
+                        {% endif %}
+
+                    <svg height="20" width="30">
+                      <circle cx="10" cy="11" r="5" fill="#4099ff" />
+                    </svg>
+                    <div class="time">{{ panel.date_position|date:'H'}} H {{ panel.date_position|date:'i'}} mn </div>
+                    
+                  </div>
+
+                  
+                
+                <svg height="5" width="300">
+                <line x1="0" y1="0" x2="300" y2="0" style="stroke:#4099ff;stroke-width:5" />
+                Sorry, your browser does not support inline SVG.
+                </svg>
+                
+                <svg height="5" width="3000">
+                <line x1="0" y1="0" x2="3000" y2="0" style="stroke:#4099ff;stroke-width:5" />
+                Sorry, your browser does not support inline SVG.
+                </svg>
+              
+                <div class="now">
+                  STGI 
+                </div> 
+                  
+    
+
+      </div>
+
+      
+    {% endif %}
+
+    {% endfor %}
+             
+    <!--  end panel-->
+      </div>
+              
+          {% endfor %}
+
+      
+        
+
+
+    </div>
+
+   
+<!-- Creation de commande d'achat et demande d'achat --> 
+    <!-- [ Main Content ] end -->
+
+    {% endblock %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+
+    <script> 
+      $(document).ready(function(){
+          $(".flip").click(function(){
+          $(".panel").slideToggle("slow");
+        });
+      });
+    </script>
+
+{% endblock javascripts %}

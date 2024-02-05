@@ -1,0 +1,255 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard Admin {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}	
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+          
+            <div class="row">
+                <!-- order-card start -->
+                <div class="col-md-6 col-xl-3" onclick='location.href="{{achat}}";' style="cursor: pointer;">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-body">
+    
+                            <h4 class="text-white" >Achat</h4>
+                            <i class=" feather icon-shopping-cart float-left"></i> 
+                            
+                
+                        </div>
+                        <div class="card-body">
+    
+                            <h6 class="text-white" >Commande En attente ...</h6>
+                            
+                        
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3" onclick='location.href="{{magasin}}";'  style="cursor: pointer;">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-body">
+                            <h4 class="text-white">Magasin</h4>
+                            <i class="feather icon-grid float-left"></i>
+                    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3" onclick='location.href="refused_access.html";' style="cursor: pointer;">
+                    <div class="card bg-c-yellow order-card">
+                        <div class="card-body">
+
+                            <h4 class="text-white">Comptabilité</h4>
+                            <i class="feather icon-layers float-left"></i>
+            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3"onclick='location.href="{{suivi}}";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            
+                            <h4 class="text-white">Suivi</h4>
+                            <i class="feather icon-activity float-left"></i>
+    
+                        </div>
+                    </div>
+                </div>
+                <!-- order-card end -->
+                <!-- users visite start 
+                <div class="col-md-12 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Unique Visitor</h5>
+                        </div>
+                        <div class="card-body pl-0 pb-0">
+                            <div id="unique-visitor-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body bg-patern">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <span>Customers</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <h2 class="mb-0">826</h2>
+                                            <span class="text-c-green">8.2%<i class="feather icon-trending-up ml-1"></i></span>
+                                        </div>
+                                    </div>
+                                    <div id="customer-chart"></div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <h3 class="m-0"><i class="fas fa-circle f-10 m-r-5 text-success"></i>674</h3>
+                                            <span class="ml-3">New</span>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="m-0"><i class="fas fa-circle text-primary f-10 m-r-5"></i>182</h3>
+                                            <span class="ml-3">Return</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body bg-patern-white">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <span>Customers</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <h2 class="mb-0 text-white">826</h2>
+                                            <span class="text-white">8.2%<i class="feather icon-trending-up ml-1"></i></span>
+                                        </div>
+                                    </div>
+                                    <div id="customer-chart1"></div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <h3 class="m-0 text-white"><i class="fas fa-circle f-10 m-r-5 text-success"></i>674</h3>
+                                            <span class="ml-3">New</span>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="m-0 text-white"><i class="fas fa-circle f-10 m-r-5 text-white"></i>182</h3>
+                                            <span class="ml-3">Return</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 users visite end 
+
+
+                social statustic start 
+                <div class="col-md-6 col-lg-4">
+                    <div class="card seo-card overflow-hidden">
+                        <div class="card-body seo-statustic">
+                            <i class="feather icon-save f-20 text-c-red"></i>
+                            <h5 class="mb-1">65%</h5>
+                            <p>Memory</p>
+                        </div>
+                        <div class="seo-chart">
+                            <div id="seo-card1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fa fa-envelope-open text-c-blue d-block f-40"></i>
+                            <h4 class="m-t-20"><span class="text-c-blue">8.62k</span> Subscribers</h4>
+                            <p class="m-b-20">Your main list is growing</p>
+                            <button class="btn btn-primary btn-sm btn-round">Manage List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fab fa-twitter text-c-green d-block f-40"></i>
+                            <h4 class="m-t-20"><span class="text-c-blgreenue">+40</span> Followers</h4>
+                            <p class="m-b-20">Your main list is growing</p>
+                            <button class="btn btn-success btn-sm btn-round">Check them out</button>
+                        </div>
+                    </div>
+                </div>
+                 social statustic end -->
+                <!-- account-section start 
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Activity Feed</h5>
+                            <div class="card-header-right">
+                                <div class="btn-group card-option">
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="feather icon-more-horizontal"></i>
+                                    </button>
+                                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="feed-blog pl-0">
+                                <li class="active-feed">
+                                    <div class="feed-user-img">
+                                        <img src="/static/assets/images/user/avatar-4.jpg" class="img-radius " alt="User-Profile-Image">
+                                    </div>
+                                    <h6><span class="badge badge-danger">File</span> Eddie uploaded new files: <small class="text-muted">2 hours ago</small></h6>
+                                    <p class="m-b-15 m-t-15">hii <b> @everone</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    <div class="row">
+                                        <div class="col-auto text-center">
+                                            <img src="/static/assets/images/gallery-grid/img-grd-gal-1.jpg" alt="img" class="img-fluid wid-100">
+                                            <h6 class="m-t-15 m-b-0">Old Scooter</h6>
+                                            <p class="text-muted m-b-0"><small>PNG-100KB</small></p>
+                                        </div>
+                                        <div class="col-auto text-center">
+                                            <img src="/static/assets/images/gallery-grid/img-grd-gal-2.jpg" alt="img" class="img-fluid wid-100">
+                                            <h6 class="m-t-15 m-b-0">Wall Art</h6>
+                                            <p class="text-muted m-b-0"><small>PNG-150KB</small></p>
+                                        </div>
+                                        <div class="col-auto text-center">
+                                            <img src="/static/assets/images/gallery-grid/img-grd-gal-3.jpg" alt="img" class="img-fluid wid-100">
+                                            <h6 class="m-t-15 m-b-0">Microphone</h6>
+                                            <p class="text-muted m-b-0"><small>PNG-150KB</small></p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="diactive-feed">
+                                    <div class="feed-user-img">
+                                        <img src="/static/assets/images/user/avatar-4.jpg" class="img-radius " alt="User-Profile-Image">
+                                    </div>
+                                    <h6><span class="badge badge-success">Task</span> Sarah marked the Pending Review: <span class="text-c-green"> Trash Can Icon Design</span><small class="text-muted"> 2 hours ago</small></h6>
+                                </li>
+                                <li class="diactive-feed mb-0">
+                                    <div class="feed-user-img">
+                                        <img src="/static/assets/images/user/avatar-4.jpg" class="img-radius " alt="User-Profile-Image">
+                                    </div>
+                                    <h6><span class="badge badge-primary">comment</span> abc posted a task: <span class="text-c-green">Design a new Homepage</span> <small class="text-muted">6 hours ago</small></h6>
+                                    <p class="m-b-15 m-t-15">hii <b> @everone</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 account-section end -->
+                <!-- Customer overview start -->
+                
+                    
+                    
+                            <img src="/static/assets/images/AventuraCata.png" style="max-width: 100%; height: auto;" alt="Aventura">
+                        
+
+                
+                <!-- Customer overview end -->
+            </div>
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+
+{% endblock javascripts %}

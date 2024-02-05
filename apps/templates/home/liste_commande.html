@@ -1,0 +1,203 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Validation {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container">
+		<div class="pcoded-content">
+			<!-- [ breadcrumb ] start -->
+			<div class="page-header">
+				<div class="page-block">
+						<div class="col-md-12">
+							<div class="page-header-title">
+								<h5 class="m-b-10" style="color:cornflowerblue ;">LISTE DES COMMANDES ACHAT</h5>
+							</div>
+						</div>
+				</div>
+			</div>
+			<!-- [ breadcrumb ] end -->
+			<!-- [ Main Content ] start -->
+			<div class="row">
+				<!-- [ sample-page ] start --> 
+				<div class="col-sm-12">
+
+					
+
+					{% for command in query_commande %}
+	
+						<div class="card" style="background-color:#51aeff;">
+
+							<div class="card-header">
+								<h4 style="color:white ;" >BC {{command.numero_dim}} </h4>
+								<h4 style="color:white ;" >{{command.fournisseur_dim}} </h4>
+								<h4 style="color:white ;" >{{command.projet_dim}} </h4>
+								<h5 style="color:white ;" > Date Livraison : {{ command.dls_dim|date:'d-F-Y'}}</h5>
+								<div class="card-header-right">
+									<div class="btn-group card-option">
+										<button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="feather icon-more-horizontal" style="color:white ;"></i>
+										</button>
+										<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+											<form action="/approuver_cmd/{{command.id}}" class="dropdown-item close-card" style="background-color:cyan;"><button class="dropdown-item reload-card"><a ><i class="feather icon-shopping-cart"></i> Approuver</a></button></form>
+											<form class="dropdown-item"><li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> Masquer les details</span><span style="display:none"><i class="feather icon-plus"></i> Afficher les details</span></a></li></form>
+								    		<form action="/refused_cmd/{{command.id}}" class="dropdown-item close-card" style="background-color:deeppink ;"><button class="dropdown-item close-card"><a><i class="feather icon-trash"></i> Refuser</a></button></form>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+
+							<div class="card-body" style="background-color:rgb(144, 209, 255);">
+
+								<table class="table table-hover m-b-0">
+									<thead>
+										<tr>
+											<th><span style="color:cornflowerblue;">Article <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Réf. Fourn <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Quantité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PU <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Unité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PRIX TOTAL <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="background-color:chartreuse ; border-radius: 10px;">STOCK_MAG <a class="help" data-toggle="popover" title="Popover title" ></a></span></th>
+											<th><span style="background-color:coral ; border-radius: 10px;">STOCK_EN_CMD <a class="help" data-toggle="popover" title="Popover title" ></a></span></th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+										{% for data in commande %}
+											{% if data.numero_commande == command.numero_dim and data.fournisseur_commande == command.fournisseur_dim and data.is_refused == 0 %}
+												<tr>
+													
+														<td>{{data.article_commande}}</td>
+														<td data-type="fournisseur" style="font-weight:bold;">{{data.ref_fourn_commande}}</td>
+														<td style="font-weight:bold ;" class="editable" data-id="{{data.id}}" data-type="quantity">{{data.quantity_commande}}</td>
+														<td style="font-weight:bold ;" >{{data.pu_commande}}</td>
+														<td>{{data.unity_demande}}</td>
+														<td style="font-weight:bold ;">{{data.prix_commande|floatformat:3}}</td>
+														<td style="font-weight:bold ;" >x</td>
+														<td style="font-weight:bold ;" >x</td>
+														<td> <button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#exampleModalCenter-{{data.id}}"><a><i class="feather icon-check-square"></i></a></button> </td> 
+
+
+														<div id="exampleModalCenter-{{data.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalCenterTitle">Motif de refus {{data.id}}</h5>
+																		
+																	</div>
+																	<form method="post" name="motif_refus" action="refused_commande_line/{{data.id}}">
+
+																		{% csrf_token %}
+
+																	<div class="modal-body">
+																	
+																			<input type="text" name="motif_refus_txt">
+																		
+																		
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
+																		<button type="submit" name="motif_refus" class="btn  btn-primary">OK</button>
+																	</div>
+																</form>
+																</div>
+															</div>
+														</div>
+												
+													
+
+													
+						
+												</tr>
+
+											{% endif %}
+
+											
+											
+
+
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+
+
+							
+
+						</div>
+					{% endfor %}
+				</div>
+
+				
+
+
+				<!-- [ sample-page ] end -->
+			</div>
+			<!-- [ Main Content ] end -->
+		</div>
+	</div>
+	<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+		
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+	$(document).ready(function(){
+		$(document).on("dblclick", ".editable", function(){
+			var value = $(this).text();
+			var input = "<input type='number' name='val' class = 'input-data' value = '"+value+"' class = 'form-control' style='width:70px' >";
+			$(this).html(input);
+			$(this).removeClass("editable")
+		});
+		$(document).on("blur", ".input-data", function(){
+			var value = $(this).val();
+			var td = $(this).parent('td');		
+			$(this).remove();
+			td.html(value);
+			td.addClass("editable");
+			sendToServer(td.data("id"), value);
+		});
+		$(document).on("keypress", ".input-data", function(e){
+			var key = e.which;
+			if (key == 13)
+			{
+				var value = $(this).val();
+				var td = $(this).parent('td');
+				$(this).remove();
+				td.html(value);
+				td.addClass("editable")
+				sendToServer(td.data("id"), value);
+			}	
+		});
+
+		function sendToServer(id, value){
+			console.log(id);
+			console.log(value);
+			$.ajax({
+				url:"update_qty",
+				type:"POST",
+				data:{id:id, value:value},
+			})
+			.done(function(response){
+				console.log(response)
+			})
+			.fail(function(){
+				console.log("Erreur du server");
+			})
+		}
+
+	});
+</script>
+
+{% endblock javascripts %}

@@ -1,0 +1,58 @@
+
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+{% block body %}
+
+
+
+ <!-- [ Main Content ] start -->
+ <div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ variant-chart ] start -->
+            
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Evaluation Des Prix</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="line-chart-3"></div>
+                    </div>
+                </div>
+            </div>
+            
+          
+            <!-- [ variant-chart ] end -->
+
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+
+
+{% endblock %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <script src="/static/assets/js/pages/chart-apex.js"></script>
+
+{% endblock javascripts %}

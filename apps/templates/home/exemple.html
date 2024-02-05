@@ -1,0 +1,88 @@
+
+{% block title %} Sample Page {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container">
+		<div class="pcoded-content">
+			<!-- [ breadcrumb ] start -->
+			<div class="page-header">
+				<div class="page-block">
+						<div class="col-md-12">
+							<div class="page-header-title">
+								<h5 class="m-b-10" style="color:cornflowerblue ;">LISTE DES COMMANDES ACHAT</h5>
+							</div>
+						</div>
+				</div>
+			</div>
+			<!-- [ breadcrumb ] end -->
+			<!-- [ Main Content ] start -->
+			<div class="row">
+				<!-- [ sample-page ] start -->
+				<div class="col-sm-12">
+						<div class="card" style="background-color:#51aeff;">
+
+							<div class="card-header">
+								<h4 style="color:white ;" >FOURNISSEUR</h4>
+								<h5 style="color:white ;" > Crée le : {{ command.date|date:'d-F-Y'}} à {{ command.date|date:'H'}} H {{ command.date|date:'i'}} mn </h5>
+								<div class="card-header-right">
+									<div class="btn-group card-option">
+										<button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="feather icon-more-horizontal" style="color:white ;"></i>
+										</button>
+										<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+											<form action="/approuver_cmd/{{command.id}}" class="dropdown-item close-card" style="background-color:cyan;"><button class="dropdown-item reload-card"><a ><i class="feather icon-shopping-cart"></i> Approuver</a></button></form>
+											<form class="dropdown-item"><li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> Masquer les details</span><span style="display:none"><i class="feather icon-plus"></i> Afficher les details</span></a></li></form>
+								    		<form class="dropdown-item close-card" style="background-color:deeppink ;"><button class="dropdown-item close-card"><a><i class="feather icon-trash"></i> Refuser</a></button></form>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+
+							<div class="card-body" style="background-color:rgb(144, 209, 255);">
+
+								<table class="table table-hover m-b-0">
+									<thead>
+										<tr>
+											<th><span style="color:cornflowerblue;">Article <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Fournisseur <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Quantité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PU <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">Unité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="color:cornflowerblue;">PRIX TOTAL <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+											<th><span style="background-color:chartreuse ; border-radius: 10px;">STOCK_MAG <a class="help" data-toggle="popover" title="Popover title" ></a></span></th>
+											<th><span style="background-color:coral ; border-radius: 10px;">STOCK_EN_CMD <a class="help" data-toggle="popover" title="Popover title" ></a></span></th>
+										</tr>
+									</thead>
+									<tbody>
+                                            <tr>
+													<td>{{data.article_commande}}</td>
+													<td style="font-weight:bold;">{{data.fournisseur_commande}}</td>
+													<td style="font-weight:bold ;">{{data.quantity_commande}}</td>
+													<td style="font-weight:bold ;" >{{data.pu_commande}}</td>
+													<td>{{data.unity_demande}}</td>
+													<td style="font-weight:bold ;" >{{data.prix_commande}}</td>
+													<td style="font-weight:bold ;" >INCONNUE</td>
+													<td style="font-weight:bold ;" >INCONNUE</td>
+											</tr>
+                                    </tbody>
+								</table>
+							</div>
+						</div>
+				</div>
+				<!-- [ sample-page ] end -->
+			</div>
+			<!-- [ Main Content ] end -->
+		</div>
+	</div>
+	<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

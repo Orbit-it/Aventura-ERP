@@ -1,0 +1,181 @@
+{% extends "layouts/base_mag.html" %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+    <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+           
+                <!-- [ Main Content ] start -->
+            
+                <div class="row align-items-center text-center">
+
+                    <form name="form_sortie_directe" method="post" action="" >
+    
+                        {% csrf_token %}
+                                            
+                        <div class="input-group mb-4" style="margin: 20px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="feather icon-shopping-cart"></i></span>
+                            </div>
+                            <input name="article_item_sortie" type="select" class="form-control" list="articles" placeholder="Article">
+                                <datalist id="articles">
+                                    {% for item in article %}
+                                    <option value="{{item.designation}}">{{item.ref_intern}}</option>
+                                    {% endfor %}
+                                </datalist>   
+    
+                           
+    
+                            <div class="input-group-prepend" style="margin-left:5px; ">
+                                <span class="input-group-text"><i class="feather icon-layers"></i></span>
+                            </div> 
+    
+                            <input name="quantity_item_sortie" type="number" min="0" step="0.01" class="form-control" placeholder="Quantité" style="width: 25px;">
+    
+                            <div class="input-group-prepend" style="margin-left:5px; ">
+                                <span class="input-group-text"><i class="feather icon-box"></i></span>
+                            </div>
+    
+                            <input name="unity_item_sortie" type="text" class="form-control" list="unities" placeholder="Unité de Sortie">
+                            <datalist id="unities">
+                                {% for item in unity %}
+                                <option value="{{item}}">
+                                {% endfor %}
+                            </datalist> 
+
+
+                            <div class="input-group-prepend" style="margin-left:5px; ">
+                                <span class="input-group-text"><i class="feather icon-tag"></i></span>
+                            </div>
+    
+                            <input name="user_item_sortie" type="text" class="form-control" list="users" placeholder="Opérateur">
+                            <datalist id="users">
+                                {% for item in users %}
+                                <option value="{{item.user_name}}">{{item.matricule}}</option>
+                                {% endfor %}
+                            </datalist>
+
+
+                            <div class="input-group-prepend" style="margin-left:5px; ">
+                                <span class="input-group-text"><i class="feather icon-check-square"></i></span>
+                            </div> 
+    
+                            <input name="motif_item_sortie" type="text"  class="form-control" placeholder="Motif de Sortie" style="margin-right: 20px ;" >
+    
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block mb-4" name="sortie_directe" style="width: 20%; margin-left: 25px; border-radius: 10px;">SORTIE</button>
+                    
+                    </form>
+                    {% if msg_sortie_directe is not None %}
+                    <h6 style="color:red; text-align: center; margin-left: 90px;"> {{msg_sortie_directe}} </h6> 
+                    {% endif %}
+                    
+    
+                    <!-- fin test -->
+                    
+                </div>
+    
+                    <!-- [ sample-page ] start -->
+    
+                    <!--Table-->
+                        
+                    <div class="col-lg-12" >
+                        <div class="card table-card">
+                            <div class="card-header">
+                                
+                                <div class="card-header-right">
+    
+                                    <div class="btn-group card-option">
+                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="feather icon-more-horizontal"></i>
+                                        </button>
+                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                            <form class="dropdown-item reload" ><li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> AGRANDIR LA LISTE</span><span style="display:none"><i class="feather icon-minimize"></i> REDUIRE LA LISTE</span></a></li></form>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <ul class="nav nav-pills nav-fill mt-3 border-bottom pb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="feather icon-file-text m-r-5"></i>LISTE DES SORTIE DIRECTE</a>
+                                    </li>
+                                   
+                                   
+                                    
+                                </ul>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                        <div class="table-responsive">
+                                            <div class="customer-scroll" style="height:420px;position:relative;">
+                                                <table class="table table-hover m-b-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><span>Opérateur <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                            <th><span>Désignation <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                            <th><span>Quantité <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                            <th><span>Unité de sortie <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                            <th><span>Motif de sortie <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for data in sortie_directe %}
+                                                            <tr>
+                                                                    <td style="color:#4099ff; width: 700px;">{{data.operateur}}</td>
+    
+                                                                    <td style="color:#4099ff; width: 700px;">{{data.designation}}</td>
+                                                                
+                                                                    <td style="color:#4099ff; width: 200px;"> {{data.quantity}} </td>
+
+                                                                    <td style="color:#4099ff; width: 200px;"> {{data.unity}} </td>
+                                                                 
+                                                                    <td style="color:#4099ff;"> {{data.motif}} </td>
+    
+                                                        
+                                                            </tr>
+    
+    
+                                                        {% endfor %} 
+    
+                                                        
+                                                      
+                                                    </tbody>
+    
+                                                    
+                                                    
+                                                   
+                                                </table>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!--End Table -->
+                
+    
+                <!-- [ Table de sortie ] end -->
+  
+            </div>
+            <!-- [ Main Content ] end -->
+        </div>
+    </section>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

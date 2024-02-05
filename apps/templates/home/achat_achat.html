@@ -1,0 +1,215 @@
+{% extends "layouts/base_achat.html" %}
+
+{% block title %} Achat {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+{% block body %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+            
+            <div class="row">
+                <!-- order-card start -->
+                <div class="col-md-6 col-xl-3" onclick='location.href="list_demande_achat.html";' style="cursor: pointer;">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">DEMANDES</h6>
+                            <h2 class="text-right text-white"><i class="feather icon-shopping-cart float-left"></i><span>{{aprouved}}</span></h2>
+                            <p class="m-b-0">Total<span class="float-right">{{demande_total}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3" onclick='location.href="list_commande_achat.html";' style="cursor: pointer;">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">COMMANDES</h6>
+                            <h2 class="text-right text-white"><i class="feather icon-tag float-left"></i><span>{{aprouved_commande}}</span></h2>
+                            <p class="m-b-0">Refusées<span class="float-right">{{refused_commande}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3" onclick='location.href="transport_planifies.html";' style="cursor: pointer;">
+                    <div class="card bg-c-yellow order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">TRANSPORT</h6>
+                            <h2 class="text-right text-white"><i class="feather icon-clock float-left"></i><span>{{planifies}}</span></h2>
+                            <p class="m-b-0">Planifiés<span class="float-right"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3"onclick='location.href="transport_non_planifies.html";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">TRANSPORT</h6>
+                            <h2 class="text-right text-white"><i class="feather icon-clock float-left"></i><span>{{non_planifies}}</span></h2>
+                            <p class="m-b-0">Non Planifiés<span class="float-right"></span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customer overview end -->
+            </div>
+            <!-- [ Main Content ] end -->       
+           
+    </div>
+
+    <div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                
+            
+                <div class="pcoded-content">
+
+                   
+                    <form name="form_open_bc" method="post" action="/new_bc">
+
+                        {%  csrf_token  %}
+            
+                    <div class="input-group-prepend" style="margin: 10px;">
+                        <span class="input-group-text" style="width:220px ;"><i class="feather icon-shield"> FOURNISSEUR </i></span>
+                    
+                        <input name="fourn_bc" type="text" style="margin-left: 5px;" class="form-control" list="fournisseurs" placeholder="Choisir le Fournisseur">
+                                    <datalist id="fournisseurs">
+                                        {% for item in fournisseur %}
+                                        <option value="{{item.name}}">
+                                        {% endfor %}
+                                    </datalist>  
+                    </div>
+            
+                    <div class="input-group-prepend" style="margin: 10px;">
+                        <span class="input-group-text" style="width:220px ;"><i class="feather icon-box"> REFERENCE PROJET </i></span>
+                    
+                        <input name="ref_bc" type="text" style="margin-left: 5px;" class="form-control"  placeholder="Saisir la Référence du Projet">
+                                     
+                    </div>
+            
+                    <div class="input-group-prepend" style="margin: 10px;">
+                        <span class="input-group-text" style="width:220px ;"><i class="feather icon-calendar"> DATE L.SOUHAITEE </i></span>
+                    
+                        <input name="dls_bc" type="date" style="margin-left: 5px;" class="form-control" placeholder="Saisir la Date de livraison souhaitée">
+                                    
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="open_bc" class="btn  btn-primary">OUVRIR</button>
+                    </div>
+            
+                   
+            
+                    </form>
+   
+
+                </div> 
+
+               
+           
+           
+        
+            
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Creation de commande d'achat et demande d'achat -->
+        <div class="pcoded-content">
+
+            
+
+            <div class="row">
+                <div class="col-md-6 col-xl-2" type="button" class="btn  btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Nouvelle Commande</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-2" onclick='location.href="add_commande.html";' style="cursor: pointer;">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Créer une COMMANDE</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-2" onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Demmande de PRIX</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-2" onclick='location.href="price_chart.html";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Evaluation de PRIX</h6>
+                        </div>
+                    </div>
+                </div>  
+                <div class="col-md-6 col-xl-2" onclick='location.href="send_commande.html";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">COMMANDE A ENVOYER</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-2" onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-center text-white">Bon de Cmd Visé</h6>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+       </div>
+    <!-- Fin de Creation de commande d'achat et demande d'achat -->   
+   
+    <!-- Creation de commande d'achat et demande d'achat -->
+    <div class="pcoded-content">
+        <div class="row">
+            <div class="col-md-6 col-xl-6" onclick='location.href="";' style="cursor: pointer;">
+                <div class="card bg-c-green order-card">
+                    <div class="card-body">
+                        <h6 class="text-center text-white">CREER UNE COMMANDE PAR PROJET</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-6" onclick='location.href="commande_envoyees.html";' style="cursor: pointer;">
+                <div class="card bg-c-red order-card">
+                    <div class="card-body">
+                        <h6 class="text-center text-white">LISTE DES COMMANDES ENVOYEES</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+   
+<!-- Creation de commande d'achat et demande d'achat --> 
+    <!-- [ Main Content ] end -->
+
+    {% endblock %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+
+    <script>
+
+      
+
+    </script>
+
+{% endblock javascripts %}

@@ -1,0 +1,90 @@
+{% extends "layouts/base_user.html" %}
+
+{% block title %} Achat {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}	
+
+{% block body %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+            
+            <div class="row">
+                <!-- order-card start -->
+                <div class="col-md-6 col-xl-3" onclick='location.href="list_demande_users.html";' style="cursor: pointer;">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">ACHAT DIRECTE</h6> <!-- Ajouter le nbre de demande effectué par utilisateur à la place de {{demande_total}} -->
+                            <h2 class="text-right text-white"><i class="feather icon-shopping-cart float-left"></i><span>{{demande_by_user}}</span></h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-3" onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-red order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">ACHAT CLASSIQUE</h6> <!-- Ajouter le nbre de demande effectué par utilisateur à la place de {{demande_total}} -->
+                            <h2 class="text-right text-white"><i class="feather icon-refresh-cw float-left"></i><span>0</span></h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-3" onclick='location.href="";' style="cursor: pointer;">
+                    <div class="card bg-c-yellow order-card">
+                        <div class="card-body">
+                            <h6 class="text-white">NOTIFICATIONS</h6> <!-- Ajouter le nbre de demande effectué par utilisateur à la place de {{demande_total}} -->
+                            <h2 class="text-right text-white"><i class="feather icon-message-circle float-left"></i><span>0</span></h2>
+                        </div>
+                    </div>
+                </div>
+              
+                
+                <!-- Customer overview end -->
+            </div>
+            <!-- [ Main Content ] end -->       
+           
+    </div>
+    <!-- Creation de commande d'achat et demande d'achat -->
+      
+    <!-- Fin de Creation de commande d'achat et demande d'achat -->   
+   
+    <!-- Creation de commande d'achat et demande d'achat -->
+    <div class="pcoded-content">
+        <div class="row">
+            <div class="col-md-6 col-xl-6" onclick='location.href="add_demande.html";' style="cursor: pointer;">
+                <div class="card bg-c-green order-card">
+                    <div class="card-body">
+                        <h6 class="text-center text-white">DEMANDE D'ACHAT DIRECTE</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-6" onclick='location.href="";' style="cursor: pointer;">
+                <div class="card bg-c-red order-card">
+                    <div class="card-body">
+                        <h6 class="text-center text-white">DEMANDE D'ACHAT CLASSIQUE</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+   
+<!-- Creation de commande d'achat et demande d'achat --> 
+    <!-- [ Main Content ] end -->
+
+    {% endblock %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+
+{% endblock javascripts %}
