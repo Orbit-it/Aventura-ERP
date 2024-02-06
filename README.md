@@ -1,4 +1,4 @@
-# [Aventura ERP ]
+# Aventura ERP
 
 
 ## ✨ Code-base structure
