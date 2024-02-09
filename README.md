@@ -2,7 +2,7 @@
 Aventura ERP is a Commercial Management project. Here are the main functions in the "Purchase" module in the views.py file located at: apps/home/views.py.
 
 
-This views.py file contains Django view functions for managing purchase requests, orders, and their approvals within the application. Below is an overview of each function:
+The views.py file contains Django view functions for managing purchase requests, orders, and their approvals within the application. Below is an overview of each function:
 
 1. send_demande(request)
 This function handles the submission of purchase requests. It retrieves items from a list associated with the user, creates corresponding Demande objects, and then deletes the items from the list. After submission, it redirects the user to the add demand page.
